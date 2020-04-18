@@ -25,6 +25,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+//Set routes
+var pages = require('./routes/pages');
+
+app.use('/pages', pages);
+
 // Start the server
 var port = 3000;
 app.listen(port, function () {
