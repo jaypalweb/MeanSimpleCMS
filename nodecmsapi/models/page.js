@@ -15,3 +15,5 @@ var PageSchema = mongoose.Schema({
         type: String
     }
 });
+
+module.exports = mongoose.model("Page", PageSchema);
