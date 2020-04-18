@@ -9,4 +9,8 @@ export class PageService {
 
   constructor(private http: HttpClient) { }
   public pagesBS = new BehaviorSubject<string>(null);
+
+  getPages() {
+    return this.http.get('http://localhost:3000/pages');
+  }
 }
