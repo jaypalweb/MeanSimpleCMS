@@ -9,7 +9,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PagesComponent } from './components/pages/pages.component';
 
 const appRoutes: Routes = [
-  { path: 'page', component: PagesComponent },
+  { path: ':page', component: PagesComponent },
   { path: '', component: PagesComponent }
 ]
 

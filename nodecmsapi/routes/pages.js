@@ -15,5 +15,17 @@ router.get('/', function (req, res) {
     })
 });
 
+/**
+ * GET a page
+ */
+router.get('/:slug', function (req, res) {
+    var slug = req.params.slug;
+    Page.findOne({ slug: slug }, function (err, page) {
+        if (err)
+            console.log(err);
+        res.json(page);
+    })
+});
+
 //Exports
 module.exports = router;
