@@ -5,13 +5,30 @@ var router = express.Router();
 var User = require('../models/user');
 
 /**
- * GET all pages
+ * POST register
  */
-router.get('/', function (req, res) {
-    Page.find({}, function (err, pages) {
+router.post('/register', function (req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    User.findOne({ username: username }, function (err, user) {
         if (err)
             console.log(err);
-        res.json(pages);
+
+        if (user) {
+            res.json("userExists");
+        } else {
+            var user = new User({
+                username: username,
+                password: password
+            });
+            user.save(function (err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.json("userRegistered");
+                }
+            });
+        }
     })
 });
 
