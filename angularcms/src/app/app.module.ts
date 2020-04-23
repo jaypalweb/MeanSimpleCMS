@@ -9,10 +9,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PagesComponent } from './components/pages/pages.component';
 import { Title } from '@angular/platform-browser';
 import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
   { path: ':page', component: PagesComponent },
   { path: '', component: PagesComponent }
 ]
@@ -22,7 +24,8 @@ const appRoutes: Routes = [
     AppComponent,
     NavbarComponent,
     PagesComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
