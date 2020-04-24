@@ -10,6 +10,8 @@ import { PageService } from './../../services/page.service';
 export class NavbarComponent implements OnInit {
 
   pages: any;
+  user: string;
+
   constructor(public pageService: PageService) { }
 
   ngOnInit() {
@@ -17,6 +19,14 @@ export class NavbarComponent implements OnInit {
       this.pageService.pagesBS.next(pages);
       this.pages = this.pageService.pagesBS;
     });
+  }
+
+  get userLoggedIn() {
+    if (localStorage.getItem("user")) {
+      this.user = localStorage.getItem("user").replace(/\"/g, "");
+      return true;
+    }
+    return false;
   }
 
 }

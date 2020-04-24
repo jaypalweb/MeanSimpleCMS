@@ -13,5 +13,19 @@
                 </li>
             </ng-container>
         </ul>
+
+        <ul *ngIf="!userLoggedIn" class="navbar-nav navbar-right">
+            <li>
+                <a class="nav-link" routerLink="/register">Register</a>
+            </li>
+            <li>
+                <a class="nav-link" routerLink="/login">Login</a>
+            </li>
+        </ul>
+        <ul *ngIf="userLoggedIn" class="navbar-nav navbar-right">
+            <li>
+                <a class="nav-link" routerLink="/logout">Hi {{ user }}, logout</a>
+            </li>
+        </ul>
     </div>
 </nav>
