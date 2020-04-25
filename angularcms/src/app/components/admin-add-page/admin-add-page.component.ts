@@ -30,7 +30,7 @@ export class AdminAddPageComponent implements OnInit {
             this.errorMsg = false;
           }.bind(this), 2000);
         } else {
-          this.successMsg = false;
+          this.successMsg = true;
           setTimeout(function () {
             this.successMsg = false;
           }.bind(this), 2000);
