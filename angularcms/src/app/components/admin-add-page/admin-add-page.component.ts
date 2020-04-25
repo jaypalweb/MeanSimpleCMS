@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageService } from 'src/app/services/page.service';
 
 @Component({
   selector: 'app-admin-add-page',
@@ -7,9 +8,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminAddPageComponent implements OnInit {
 
-  constructor() { }
+  public successMsg: boolean = false;
+  public errorMsg: boolean = false;
+  public title: string;
+  public content: string;
+
+  constructor(
+    private pageService: PageService
+  ) { }
 
   ngOnInit() {
+  }
+
+  addPage({ form, value, valid }) {
+    form.reset();
+    if (valid) {
+      this.pageService.postAddPage(value).subscribe(res => {
+        if (res == 'pageExists') {
+          this.errorMsg = true;
+          setTimeout(function () {
+            this.errorMsg = false;
+          }.bind(this), 2000);
+        } else {
+          this.successMsg = false;
+          setTimeout(function () {
+            this.successMsg = false;
+          }.bind(this), 2000);
+          this.pageService.getPages().subscribe(pages => {
+            this.pageService.pagesBS.next(pages);
+          });
+        }
+      });
+    } else {
+      console.log('Form is not valid');
+    }
   }
 
 }
