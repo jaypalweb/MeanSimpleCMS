@@ -109,5 +109,20 @@ router.post('/edit-page/:id', function (req, res) {
     });
 });
 
+/**
+ * GET delete page
+ */
+router.get('/delete-page/:id', function (req, res) {
+    var id = req.params.id;
+    Page.findByIdAndRemove(id, function (err) {
+        if (err) {
+            console.log(err);
+            res.json("error");
+        } else {
+            res.json("ok");
+        }
+    })
+});
+
 //Exports
 module.exports = router;
