@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PageService } from 'src/app/services/page.service';
+
+declare var CKEDITOR: any;
 
 @Component({
   selector: 'app-admin-edit-page',
@@ -9,6 +11,7 @@ import { PageService } from 'src/app/services/page.service';
 })
 export class AdminEditPageComponent implements OnInit {
 
+  page: any;
   title: string;
   content: string;
   id: string;
@@ -16,18 +19,32 @@ export class AdminEditPageComponent implements OnInit {
   param: any;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private pageService: PageService
   ) { }
 
   ngOnInit() {
+    if (localStorage.getItem("user") !== "\"admin\"") {
+      this.router.navigateByUrl('');
+    } else {
+      CKEDITOR.replace('content');
+    }
+
     this.route.params.subscribe(params => {
       this.param = params['id'];
       this.pageService.getEditPage(this.param).subscribe(page => {
+        this.page = page;
         this.title = page['title'];
         this.content = page['content'];
         this.id = page['id'];
       });
+
+      //content sometimes not comming - below a fix
+      setTimeout(function () {
+        CKEDITOR.instances.content.setData(this.content);
+      }.bind(this), 500);
+
     });
   }
 

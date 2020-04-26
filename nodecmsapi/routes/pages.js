@@ -70,5 +70,37 @@ router.get('/edit-page/:id', function (req, res) {
     })
 });
 
+/**
+ * POST edit page
+ */
+router.post('/edit-page/:id', function (req, res) {
+    var id = req.params.id;
+    var title = req.body.title;
+    var slug = req.body.title.replace(/\s+/g, '-').toLowerCase();
+    var content = req.body.content;
+
+    Page.findById(id, function (err, page) {
+        if (err)
+            console.log(err);
+
+        if (page.slug === slug) {
+            res.json("pageExists");
+        } else {
+            page.title = title;
+            page.slug = slug;
+            page.content = content;
+
+            page.save(function (err) {
+                if (err) {
+                    console.log(err);
+                    res.json("error");
+                } else {
+                    res.json("ok");
+                }
+            });
+        }
+    })
+});
+
 //Exports
 module.exports = router;
