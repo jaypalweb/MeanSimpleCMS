@@ -34,6 +34,8 @@ router.post('/add-page', function (req, res) {
     var title = req.body.title;
     var slug = req.body.title.replace(/\s+/g, '-').toLowerCase();
     var content = req.body.content;
+    var hasSidebar = req.body.hasSidebar;
+    var sidebar = (hasSidebar) ? "yes" : "no";
 
     Page.findOne({ slug: slug }, function (err, page) {
         if (err)
@@ -46,7 +48,7 @@ router.post('/add-page', function (req, res) {
                 title: title,
                 slug: slug,
                 content: content,
-                sidebar: "no"
+                sidebar: sidebar
             });
             page.save(function (err) {
                 if (err)
