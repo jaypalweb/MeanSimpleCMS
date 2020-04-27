@@ -36,9 +36,7 @@ router.post('/edit-sidebar', function (req, res) {
             } else {
                 res.json("ok");
             }
-
         });
-        res.json(sidebar);
     })
 });
 
