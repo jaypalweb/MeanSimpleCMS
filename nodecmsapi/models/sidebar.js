@@ -5,6 +5,6 @@ var SidebarSchema = mongoose.Schema({
     content: {
         type: String
     }
-}, { collection: 'Sidebar' });
+}, { collection: 'sidebar' });
 
 module.exports = mongoose.model("Sidebar", SidebarSchema);
