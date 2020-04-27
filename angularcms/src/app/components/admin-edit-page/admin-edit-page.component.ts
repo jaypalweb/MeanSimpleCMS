@@ -19,6 +19,7 @@ export class AdminEditPageComponent implements OnInit {
   errorMsg: boolean = false;
   errorMsg2: boolean = false;
   param: any;
+  sidebar: boolean = false;
 
   constructor(
     private router: Router,
@@ -40,6 +41,9 @@ export class AdminEditPageComponent implements OnInit {
         this.title = page['title'];
         this.content = page['content'];
         this.id = page['_id'];
+        if (page['sidebar'] === "yes") {
+          this.sidebar = true;
+        }
       });
 
       //content sometimes not comming - below a fix
